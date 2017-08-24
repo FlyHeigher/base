@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>	</title>
+</head>
+<body>
+<script type="text/javascript">
+function Person(){
+	this.name = 'aaa'
+	this.show = function(){
+		alert(this.name)
+	}
+}
+
+var p = new Person();
+console.log(p)
+console.log(Object.prototype)
+Object.defineProperty( p, "name", {
+	configurable: true,
+	writable: false
+})
+Object.defineProperty( p, "show", {
+	configurable: false,
+	writable: false
+})
+delete p.name
+p.show = function(){
+	alert(1)
+}
+console.log(p)
+
+/*
+	writable true为默认值  false为不可更改设置后不可以更改默认值(就像undefined)
+
+	configurable true为属性/方法可删除 false时不可删除
+
+*/
+
+
+</script>
+</body>
+</html>
