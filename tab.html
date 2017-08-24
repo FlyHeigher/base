@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>	</title>
+	<style type="text/css">
+		*{
+			padding: 0px;
+			margin: 0px;
+		}
+		.box {
+			width: 300px;
+			height: 250px;
+			margin: 10px auto;
+			border:1px solid #ccc;
+		}
+		.box .tit{
+			width: 300px;
+			height: 50px;
+			background: #fff;
+		}
+		.box .tit div{
+			width: 50px;
+			height: 50px;
+			text-align: center;
+			line-height: 50px;
+			float: left;
+			box-sizing: border-box;
+			border: 1px solid #ccc;
+			cursor: pointer;
+			transition: .35s;
+		}
+		.box .tit div.select{
+			background: #ccc;
+		}
+		.box .cont {
+			width: 300px;
+			height: 200px;
+			text-align: center;
+			line-height: 200px;
+		}
+		.cont div{
+			width: 300px;
+			height: 200px;
+			display: none;
+			transition: .35s;
+		}
+		.cont div.show {
+			background: #ccc;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+<div class="box">
+	<div class="tit">
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+		<div>5</div>
+		<div>6</div>
+	</div>
+	<div class="cont">
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+		<div>5</div>
+		<div>6</div>
+	</div>
+</div>	
+<script type="text/javascript">
+	function Tab(opt){
+		opt.iNow = opt.iNow||0;
+		this.iNow = opt.iNow;
+		this.tit = opt.tit.children;
+		this.cont = opt.cont.children;
+		this.tit[this.iNow].classList.add('select');
+		this.cont[this.iNow].classList.add('show');
+		for (var i = 0; i < this.tit.length; i++) {
+			this.tit[i].index = i;
+			var _this = this;
+			this.tit[i].onmousemove = function(){
+				_this.tit[_this.iNow].classList.remove('select');
+				_this.cont[_this.iNow].classList.remove('show');
+				_this.iNow = this.index;
+				_this.tit[_this.iNow].classList.add('select');
+				_this.cont[_this.iNow].classList.add('show');
+			}
+		}
+	}
+new Tab({
+	'iNow':5,
+	'tit':document.querySelector('.tit'),
+	'cont':document.querySelector('.cont')
+})
+/*
+	tabAPI
+	title需要一个select的类名为选中状态
+	cont需要一个show的类名为选中状态
+		{
+			iNow:0,'最初显示第几个 默认第一个(非必填)',
+			titParent:className,tit父级(对象)
+			contParent:className,cont父级(对象)
+		}
+
+
+*/
+</script>
+</body>
+</html>
